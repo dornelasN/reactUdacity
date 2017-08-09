@@ -83,7 +83,7 @@ body, .app {
   padding-top: 60px;
 }
 
-.list_contacts-top {
+.list-contacts-top {
   position: fixed;
   width: 100%;
   top: 0;
@@ -96,9 +96,11 @@ body, .app {
   padding: 20px 20px 20px 60px;
   background-image: url('./icons/search.svg');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left;
   background-size: 28px;
-  font-size: 0;
+  font-size: 16px;
+  border: 0;
+  outline: none;
 }
 
 .showing-contacts {
