@@ -9,38 +9,38 @@ const readFileAsDataURL = (file) =>
       resolve(event.target.result)
     }
 
-    reader.readFileAsDataURL(file)
+    reader.readAsDataURL(file)
   })
 
-  const resizeImage = (imageURL, canvas, maxHeight) =>
-    new Promise(resolve => {
-      const image = new Image()
+const resizeImage = (imageURL, canvas, maxHeight) =>
+  new Promise(resolve => {
+    const image = new Image()
 
-      image.onload = () => {
-        const context = canvas.getContect('2d')
+    image.onload = () => {
+      const context = canvas.getContext('2d')
 
-        if (image.height > maxHeight){
-          image.width *= maxHeight / image.height
-          image.height = maxHeight
-        }
+      if (image.height > maxHeight) {
+        image.width *= maxHeight / image.height
+        image.height = maxHeight
+      }
 
-      context.clearReact(0, 0, canvas.width, canvas.height)
+      context.clearRect(0, 0, canvas.width, canvas.height)
       canvas.width = image.width
       canvas.height = image.height
 
       context.drawImage(image, 0, 0, image.width, image.height)
 
       resolve(canvas.toDataURL('image/jpeg'))
-      }
+    }
 
-      image.src = imageURL
-    })
+    image.src = imageURL
+  })
 
 /**
-* A custom <input> that dynamically reads and resizes image files before
-* submitting them to the server as data URLs. Also, shows a preview of the image
-*/
-class = ImageInput extends React.Component {
+ * A custom <input> that dynamically reads and resizes image files before
+ * submitting them to the server as data URLs. Also, shows a preview of the image.
+ */
+class ImageInput extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     name: PropTypes.string,
@@ -50,7 +50,6 @@ class = ImageInput extends React.Component {
   state = {
     value: ''
   }
-
 
   handleFileChange = (event) => {
     const file = event.target.files[0]
@@ -62,12 +61,12 @@ class = ImageInput extends React.Component {
         })
       })
     } else {
-      this.setState({ value: ''})
+      this.setState({ value: '' })
     }
   }
 
   handleFormReset = () => {
-    this.setState({ value: ''})
+    this.setState({ value: '' })
   }
 
   componentDidMount() {
@@ -80,8 +79,8 @@ class = ImageInput extends React.Component {
   }
 
   render() {
-    const { className, name } = this.prop
-    const { value } = this.setState
+    const { className, name } = this.props
+    const { value } = this.state
 
     const style = {
       position: 'relative'
@@ -96,7 +95,7 @@ class = ImageInput extends React.Component {
 
     return (
       <div className={className} style={style}>
-        <input type="hidden" name={name} value ={value}/>
+        <input type="hidden" name={name} value={value} />
         <input
           ref={node => this.fileInput = node}
           type="file"
